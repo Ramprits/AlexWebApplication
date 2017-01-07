@@ -1,0 +1,161 @@
+@using AlexWebApp.Models.ClientViewModels
+@using Microsoft.AspNetCore.Mvc.Rendering
+@model AlexWebApp.Models.ClientViewModels.Client
+
+
+<div class="panel panel-primary">
+  <div class="panel-heading">
+    <h3 class="panel-title">Add a New Client</h3>
+  </div>
+  <div class="panel-body">
+    @using (Html.BeginForm("NewClient", "Clients", FormMethod.Post,
+        new {@class = "form"}))
+    {
+        <div class="row">
+
+          <div class="col-md-offset-2 col-md-10">
+            <div id="page-wrapper">
+              <div class="row">
+                <div class="col-lg-12">
+                  <h1 class="page-header">
+                    <small>We're always happy to gain new customers.</small>
+                  </h1>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label asp-for="FirstName"></label>
+                    <input asp-for="FirstName" class="form-control"/>
+                    <span asp-validation-for="FirstName" class="text-danger"></span>
+                  </div>
+                  <div class="form-group">
+                    <label asp-for="LastName"></label>
+                    <input asp-for="LastName" class="form-control"/>
+                    <span asp-validation-for="LastName" class="text-danger"></span>
+                  </div>
+                  <div class="form-group">
+                    <label asp-for="CompanyName"></label>
+                    <input asp-for="CompanyName" class="form-control"/>
+                    <span asp-validation-for="CompanyName" class="text-danger"></span>
+                  </div>
+                  <div class="form-group">
+                    <label asp-for="Phone"></label>
+                    <input asp-for="Phone" class="form-control"/>
+                    <span asp-validation-for="Phone" class="text-danger"></span>
+                  </div>
+
+                  <div class="form-group">
+                    <label asp-for="Email"></label>
+                    <input asp-for="Email" class="form-control"/>
+                    <span asp-validation-for="Email" class="text-danger"></span>
+                  </div>
+                  <div class="form-group">
+                    <label asp-for="ContactDate"></label>
+                    <input asp-for="ContactDate" class="form-control"/>
+                    <span asp-validation-for="ContactDate" class="text-danger"></span>
+                  </div>
+                  <div class="form-group">
+                    <label asp-for="ClientType">
+                    </label> @{ var clientType = new List<SelectListItem>()
+                                {
+                                    new SelectListItem() {Value = "1", Text = "Small Business"},
+                                    new SelectListItem()
+                                    {
+                                        Value = "2", Text
+                                            = "Business"
+                                    },
+                                    new SelectListItem() {Value = "3", Text = "Corporation"},
+                                }; }
+                    @Html.DropDownListFor(x => x.ClientType, clientType, new {@class = "form-control"})
+                  </div>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-6 form-group">
+                  <label asp-for="Notes"></label>
+                  <textarea asp-for="Notes" class="form-control" rows="5"></textarea>
+                  <span asp-validation-for="Notes" class="text-danger"></span>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6">
+                  <h3>Billing Address</h3>
+                  <div class="row">
+                    <div class="col-md-6 form-group">
+                      <label asp-for="BillingAddress.Street"></label>
+                      <input asp-for="BillingAddress.Street" class="form-control"/>
+                      <span asp-validation-for="BillingAddress.Street" class="text-danger"></span>
+                    </div>
+                    <div class="col-md-6 form-group">
+                      <label asp-for="BillingAddress.City"></label>
+                      <input asp-for="BillingAddress.City" class="form-control"/>
+                      <span asp-validation-for="BillingAddress.City" class="text-danger"></span>
+
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-6 form-group">
+                      <label asp-for="MailingAddress.State"></label>
+                      <input asp-for="MailingAddress.State" class="form-control"/>
+                      <span asp-validation-for="MailingAddress.State" class="text-danger"></span>
+
+                    </div>
+                    <div class="col-md-6 form-group">
+                      <label asp-for="MailingAddress.Zip"></label>
+                      <input asp-for="MailingAddress.Zip" class="form-control"/>
+                      <span asp-validation-for="MailingAddress.Zip" class="text-danger"></span>
+
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6">
+                  <h3>Mailling Address</h3>
+                  <div class="row">
+                    <div class="col-md-6 form-group">
+                      <label asp-for="MailingAddress.Street"></label>
+                      <input asp-for="MailingAddress.Street" class="form-control"/>
+                      <span asp-validation-for="MailingAddress.Street" class="text-danger"></span>
+                    </div>
+                    <div class="col-md-6 form-group">
+                      <label asp-for="MailingAddress.City"></label>
+                      <input asp-for="MailingAddress.City" class="form-control"/>
+                      <span asp-validation-for="MailingAddress.City" class="text-danger"></span>
+
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-6 form-group">
+                      <label asp-for="MailingAddress.State"></label>
+                      <input asp-for="MailingAddress.State" class="form-control"/>
+                      <span asp-validation-for="MailingAddress.State" class="text-danger"></span>
+
+                    </div>
+                    <div class="col-md-6 form-group">
+                      <label asp-for="MailingAddress.Zip"></label>
+                      <input asp-for="MailingAddress.Zip" class="form-control"/>
+                      <span asp-validation-for="MailingAddress.Zip" class="text-danger"></span>
+
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <button type="submit" class="btn btn-primary col-md-offset-2">
+            <i class="fa fa-save" aria-hidden="true"></i>
+            Save
+          </button>
+          <button type="submit" class="btn btn-danger col-md-offset-2">
+
+            Reset
+
+          </button>
+
+        </div>
+    }
+  </div>
+</div>

@@ -1,0 +1,33 @@
+﻿@using AlexWebApp.Models.EmployeeViewModels
+@model IEnumerable<Employee>
+<table class="table table-bordered table-striped">
+
+  <thead style="background-color: yellow">
+  <tr class="text-center">
+    <td>Title</td>
+    <td>Name</td>
+    <td>Salary</td>
+    <td>Location</td>
+    <td>Action</td>
+  </tr>
+  </thead>
+  <tbody>
+
+  @foreach (var employee in Model)
+  {
+      <tr class="text-center">
+        <td>@employee.Title</td>
+        <td>@employee.Name</td>
+        <td>@employee.Salary</td>
+        <td>@employee.Location</td>
+        <td>
+          <button type="button" class="btn btn-info">Edit</button>
+          <button type="button" class="btn btn-warning">Details</button>
+          <button type="button" class="btn btn-danger">Delete</button>
+        </td>
+      </tr>
+  }
+
+  </tbody>
+
+</table>
