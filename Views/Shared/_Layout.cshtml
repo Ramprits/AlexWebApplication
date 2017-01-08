@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - Alex Web App</title>
     <environment names="Development">
-        <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+      <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
         <link rel="stylesheet" href="~/css/site.css" />
     </environment>
     <environment names="Staging,Production">
@@ -23,14 +23,16 @@
         @RenderBody()
         <hr />
         <footer>
-            <p>&copy; 2016 - AlexWebApp</p>
+            <p>&copy; @DateTime.Now.Year - Alex Web App</p>
         </footer>
     </div>
 
     <environment names="Development">
         <script src="~/lib/jquery/dist/jquery.js"></script>
-        <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
-        <script src="~/lib/underscore/underscore.js"></script>
+      <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
+      <script src="~/lib/jquery-validation-unobtrusive/jquery-validation-unobtrusive.js"></script>
+      <script src="~/lib/underscore/underscore.js"></script>
+
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
         <script src="~/js/site.js" asp-append-version="true"></script>
     </environment>

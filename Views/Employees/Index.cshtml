@@ -3,7 +3,7 @@
 <a asp-action="Create" asp-controller="Employees" class="btn btn-info">Create New Employee</a>
 <table class="table table-bordered table-striped">
 
-  <thead style="background-color: yellow">
+  <thead>
   <tr class="text-center">
     <td>Title</td>
     <td>Name</td>
@@ -22,6 +22,7 @@
         <td>@employee.Salary</td>
         <td>@employee.Location</td>
         <td>
+          @Html.ActionLink("Edit", "Edit", "Employees", new {@id = @employee.EmployeeId})
           <button type="button" class="btn btn-info">Edit</button>
           <button type="button" class="btn btn-warning">Details</button>
           <button type="button" class="btn btn-danger">Delete</button>
