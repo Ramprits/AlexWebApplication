@@ -29,15 +29,15 @@ namespace AlexWebApp.Controllers
         {
             return View();
         }
-
         [HttpPost]
         public IActionResult Create(Employee item)
         {
-            if (ModelState == null || !ModelState.IsValid) return View();
-            _context.Employees.Add(item);
-            _context.SaveChanges();
-
-            return View();
+            {
+                if (ModelState == null || !ModelState.IsValid) return View();
+                _context.Employees.Add(item);
+                _context.SaveChanges();
+                return RedirectToAction("Index", "Employees");
+            }
         }
     }
 }

@@ -1,6 +1,38 @@
 ﻿@model AlexWebApp.Models.EmployeeViewModels.Employee
 
-@using (Html.beginForm())
+@using (Html.BeginForm("Create", "Employees", FormMethod.Post,
+    new {@class = "form"}))
 {
-
+    <div class="form-group">
+      <label asp-for="Title"></label>
+      @{
+          var title = new List<SelectListItem>()
+          {
+              new SelectListItem() {Text = "Software Developer", Selected = true},
+              new SelectListItem() {Text = "Human Resource"},
+              new SelectListItem() {Text = "Test Team"},
+              new SelectListItem() {Text = "CTO"}
+          };
+      }
+      @Html.DropDownListFor(x => x.Title, title, new {@class = "form-control"})
+      <span asp-validation-for="Title" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+      <label asp-for="Name"></label>
+      <input asp-for="Name" class="form-control"/>
+      <span asp-validation-for="Name" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+      <label asp-for="Salary"></label>
+      <input asp-for="Salary" class="form-control"/>
+      <span asp-validation-for="Salary" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+      <label asp-for="Location"></label>
+      <input asp-for="Location" class="form-control"/>
+      <span asp-validation-for="Location" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+      <button type="submit" class="btn btn-primary">Save</button>
+    </div>
 }
