@@ -2,6 +2,7 @@
 using System.Linq;
 using AlexWebApp.Data;
 using AlexWebApp.Data.Migrations;
+using AlexWebApp.Infrastructure;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Employee = AlexWebApp.Models.EmployeeViewModels.Employee;
@@ -11,9 +12,12 @@ namespace AlexWebApp.Controllers
     public class EmployeesController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private readonly GenericRepository<Employee> _repo;
 
-        public EmployeesController(ApplicationDbContext context)
+        public EmployeesController(ApplicationDbContext context,
+            GenericRepository<Employee> repo)
         {
+            _repo = repo;
             _context = context;
         }
 
@@ -37,14 +41,10 @@ namespace AlexWebApp.Controllers
             return RedirectToAction("Index", "Employees");
         }
 
-        public IActionResult Index()
+       public IActionResult Index()
             => _context.Employees != null ? View(_context.Employees.ToList()) : View();
 
-        public IActionResult GetEmployee() =>
-            _context.Employees != null ? View(_context.Employees.ToList()) : View();
-
-        public IActionResult GetEmployees() =>
-            _context.Employees != null ? View(_context.Employees.ToList()) : View();
+//        public IActionResult Index() => View(_repo.All());
 
         public IActionResult Index1() =>
             _context.Employees != null ? View(_context.Employees.ToList()) : View();

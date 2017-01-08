@@ -6,6 +6,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using AlexWebApp.Data;
+using AlexWebApp.Data.Migrations;
+using AlexWebApp.Infrastructure;
 using AlexWebApp.Models;
 using AlexWebApp.Services;
 
@@ -45,6 +47,7 @@ namespace AlexWebApp
                services.AddMvc();
 
                // Add application services.
+              services.AddTransient<GenericRepository<Employee>,GenericRepository<Employee>>();
                services.AddTransient<IEmailSender, AuthMessageSender>();
                services.AddTransient<ISmsSender, AuthMessageSender>();
           }
