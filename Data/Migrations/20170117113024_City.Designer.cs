@@ -9,9 +9,10 @@ using AlexWebApp.Models.CustomerViewModels;
 namespace AlexWebApp.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20170117113024_City")]
+    partial class City
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.1.0-rtm-22752")
@@ -73,6 +74,8 @@ namespace AlexWebApp.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<int?>("CityId");
+
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasMaxLength(200);
@@ -82,6 +85,8 @@ namespace AlexWebApp.Data.Migrations
                         .HasMaxLength(20);
 
                     b.HasKey("Id");
+
+                    b.HasIndex("CityId");
 
                     b.ToTable("Citieses");
                 });
@@ -103,8 +108,6 @@ namespace AlexWebApp.Data.Migrations
                         .HasMaxLength(20);
 
                     b.HasKey("Id");
-
-                    b.HasIndex("CityId");
 
                     b.ToTable("PointsOfInterest");
                 });
@@ -413,12 +416,11 @@ namespace AlexWebApp.Data.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
-            modelBuilder.Entity("AlexWebApp.Models.CitiesViewModel.PointsOfInterest", b =>
+            modelBuilder.Entity("AlexWebApp.Models.CitiesViewModel.Cities", b =>
                 {
-                    b.HasOne("AlexWebApp.Models.CitiesViewModel.Cities", "Cities")
-                        .WithMany("PointsOfInterest")
-                        .HasForeignKey("CityId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                    b.HasOne("AlexWebApp.Models.CitiesViewModel.PointsOfInterest", "PointsOfInterest")
+                        .WithMany("Cities")
+                        .HasForeignKey("CityId");
                 });
 
             modelBuilder.Entity("AlexWebApp.Models.CustomerViewModels.Address", b =>

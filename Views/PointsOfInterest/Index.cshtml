@@ -1,18 +1,38 @@
-﻿@model $model$
+﻿@model IEnumerable<AlexWebApp.Models.CitiesViewModel.PointsOfInterest>
 
-@{
-  Layout = null;
-}
+<label class="label control-label">
+  Points Of Interest List
+</label>
 
-<!DOCTYPE html>
 
-<html>
-<head>
-  <title>$title$</title>
-</head>
-<body>
-  <div>
-    $END$  
-  </div>
-</body>
-</html>
+<table class="table table-hover table-responsive table-condensed ">
+  <thead >
+  <tr class="success">
+    <td>City Id</td>
+    <td>Name</td>
+    <td>Description</td>
+    <td>Points Of Interest Details</td>
+    <td>Action</td>
+
+  </tr>
+  </thead>
+  <tbody>
+
+  @foreach (var pi  in Model)
+  {
+      <tr>
+        <td>@pi.Id</td>
+        <td>@pi.Name</td>
+        <td>@pi.Description</td>
+        <td>@pi.Cities.Name</td>
+        <td>
+          <a asp-action="" asp-controller="" class="btn alert-link">Edit</a>
+          <a asp-action="" asp-controller="" class="btn alert-link">Details</a>
+          <a asp-action="" asp-controller="" class="btn alert-link">Delete</a>
+
+        </td>
+      </tr>
+  }
+
+  </tbody>
+</table>

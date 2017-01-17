@@ -1,18 +1,21 @@
-﻿@model $model$
+﻿@model IEnumerable<AlexWebApp.Models.CustomerViewModels.Customer>
 
-@{
-  Layout = null;
-}
+<table class="table table-bordered">
+  <thead>
+  <tr>
+    <td>First Name</td>
+    <td>Last Name</td>
+  </tr>
+  </thead>
+  <tbody>
 
-<!DOCTYPE html>
+  <tr>
+    @foreach (var item in Model)
+    {
+        <td>@item.FirstName</td>
+        <td>@item.LastName</td>
+    }
+  </tr>
+  </tbody>
 
-<html>
-<head>
-  <title>$title$</title>
-</head>
-<body>
-  <div>
-    $END$  
-  </div>
-</body>
-</html>
+</table>

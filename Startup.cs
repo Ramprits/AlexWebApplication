@@ -47,7 +47,6 @@ namespace AlexWebApp
                services.AddMvc();
 
                // Add application services.
-              services.AddTransient<GenericRepository<Employee>,GenericRepository<Employee>>();
                services.AddTransient<IEmailSender, AuthMessageSender>();
                services.AddTransient<ISmsSender, AuthMessageSender>();
           }

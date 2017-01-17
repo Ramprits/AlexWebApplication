@@ -9,9 +9,10 @@ using AlexWebApp.Models.CustomerViewModels;
 namespace AlexWebApp.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20170110023305_Customers")]
+    partial class Customers
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.1.0-rtm-22752")
@@ -67,48 +68,6 @@ namespace AlexWebApp.Data.Migrations
                     b.ToTable("AspNetUsers");
                 });
 
-            modelBuilder.Entity("AlexWebApp.Models.CitiesViewModel.Cities", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasMaxLength(200);
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(20);
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Citieses");
-                });
-
-            modelBuilder.Entity("AlexWebApp.Models.CitiesViewModel.PointsOfInterest", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("CityId");
-
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasMaxLength(200);
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(20);
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("CityId");
-
-                    b.ToTable("PointsOfInterest");
-                });
-
             modelBuilder.Entity("AlexWebApp.Models.CustomerViewModels.Address", b =>
                 {
                     b.Property<int>("AddressId")
@@ -130,7 +89,7 @@ namespace AlexWebApp.Data.Migrations
 
                     b.HasIndex("CustomerId");
 
-                    b.ToTable("Addresses");
+                    b.ToTable("Customer");
                 });
 
             modelBuilder.Entity("AlexWebApp.Models.CustomerViewModels.Category", b =>
@@ -411,14 +370,6 @@ namespace AlexWebApp.Data.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens");
-                });
-
-            modelBuilder.Entity("AlexWebApp.Models.CitiesViewModel.PointsOfInterest", b =>
-                {
-                    b.HasOne("AlexWebApp.Models.CitiesViewModel.Cities", "Cities")
-                        .WithMany("PointsOfInterest")
-                        .HasForeignKey("CityId")
-                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("AlexWebApp.Models.CustomerViewModels.Address", b =>

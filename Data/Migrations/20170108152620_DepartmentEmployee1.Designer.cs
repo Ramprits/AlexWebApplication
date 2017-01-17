@@ -4,14 +4,14 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using AlexWebApp.Data;
-using AlexWebApp.Models.CustomerViewModels;
 
 namespace AlexWebApp.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20170108152620_DepartmentEmployee1")]
+    partial class DepartmentEmployee1
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.1.0-rtm-22752")
@@ -67,187 +67,103 @@ namespace AlexWebApp.Data.Migrations
                     b.ToTable("AspNetUsers");
                 });
 
-            modelBuilder.Entity("AlexWebApp.Models.CitiesViewModel.Cities", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasMaxLength(200);
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(20);
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Citieses");
-                });
-
-            modelBuilder.Entity("AlexWebApp.Models.CitiesViewModel.PointsOfInterest", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("CityId");
-
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasMaxLength(200);
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(20);
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("CityId");
-
-                    b.ToTable("PointsOfInterest");
-                });
-
-            modelBuilder.Entity("AlexWebApp.Models.CustomerViewModels.Address", b =>
+            modelBuilder.Entity("AlexWebApp.Models.ClientViewModels.Address", b =>
                 {
                     b.Property<int>("AddressId")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<int>("AddressType");
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("City");
 
-                    b.Property<int>("CustomerId");
+                    b.Property<string>("State");
 
-                    b.Property<string>("PostalCode");
+                    b.Property<string>("Street")
+                        .HasMaxLength(50);
 
-                    b.Property<string>("StateProvince");
-
-                    b.Property<string>("Street");
+                    b.Property<string>("Zip");
 
                     b.HasKey("AddressId");
-
-                    b.HasIndex("CustomerId");
 
                     b.ToTable("Addresses");
                 });
 
-            modelBuilder.Entity("AlexWebApp.Models.CustomerViewModels.Category", b =>
+            modelBuilder.Entity("AlexWebApp.Models.ClientViewModels.Client", b =>
                 {
-                    b.Property<int>("CategoryId")
-                        .ValueGeneratedOnAdd();
+                    b.Property<int>("ClientId")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Name");
+                    b.Property<int?>("BillingAddressAddressId");
 
-                    b.Property<int?>("ProductId");
+                    b.Property<string>("ClientType");
 
-                    b.HasKey("CategoryId");
+                    b.Property<string>("CompanyName")
+                        .IsRequired();
 
-                    b.HasIndex("ProductId");
+                    b.Property<DateTime?>("ContactDate");
 
-                    b.ToTable("Categories");
+                    b.Property<string>("Email")
+                        .IsRequired();
+
+                    b.Property<string>("FirstName")
+                        .IsRequired();
+
+                    b.Property<string>("LastName")
+                        .IsRequired();
+
+                    b.Property<int?>("MailingAddressAddressId");
+
+                    b.Property<string>("Notes")
+                        .IsRequired()
+                        .HasMaxLength(25);
+
+                    b.Property<string>("Phone")
+                        .IsRequired();
+
+                    b.HasKey("ClientId");
+
+                    b.HasIndex("BillingAddressAddressId");
+
+                    b.HasIndex("MailingAddressAddressId");
+
+                    b.ToTable("Clients");
                 });
 
-            modelBuilder.Entity("AlexWebApp.Models.CustomerViewModels.ContactDetail", b =>
+            modelBuilder.Entity("AlexWebApp.Models.ClientViewModels.EmailPromo", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("CustomerId");
+                    b.Property<int?>("ClientId");
 
-                    b.Property<string>("Facebook");
+                    b.Property<bool>("IsSubscribed");
 
-                    b.Property<string>("HomePhone");
-
-                    b.Property<string>("LinkedIn");
-
-                    b.Property<string>("Messenger");
-
-                    b.Property<string>("MobilePhone");
-
-                    b.Property<string>("OfficePhone");
-
-                    b.Property<string>("Skype");
-
-                    b.Property<string>("TwitterAlias");
+                    b.Property<string>("Title");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CustomerId")
-                        .IsUnique();
+                    b.HasIndex("ClientId");
 
-                    b.ToTable("ContactDetails");
+                    b.ToTable("EmailPromos");
                 });
 
-            modelBuilder.Entity("AlexWebApp.Models.CustomerViewModels.Customer", b =>
-                {
-                    b.Property<int>("CustomerId")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<DateTime>("DateOfBirth");
-
-                    b.Property<string>("FirstName");
-
-                    b.Property<string>("LastName");
-
-                    b.HasKey("CustomerId");
-
-                    b.ToTable("Customers");
-                });
-
-            modelBuilder.Entity("AlexWebApp.Models.CustomerViewModels.LineItem", b =>
-                {
-                    b.Property<int>("LineItemId")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<int>("OrderId");
-
-                    b.Property<int>("ProductId");
-
-                    b.Property<int>("Quantity");
-
-                    b.HasKey("LineItemId");
-
-                    b.HasIndex("OrderId");
-
-                    b.HasIndex("ProductId");
-
-                    b.ToTable("LineItems");
-                });
-
-            modelBuilder.Entity("AlexWebApp.Models.CustomerViewModels.Order", b =>
+            modelBuilder.Entity("AlexWebApp.Models.ClientViewModels.Order", b =>
                 {
                     b.Property<int>("OrderId")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<int>("CustomerId");
-
-                    b.Property<DateTime>("OrderDate");
-
-                    b.HasKey("OrderId");
-
-                    b.HasIndex("CustomerId");
-
-                    b.ToTable("Orders");
-                });
-
-            modelBuilder.Entity("AlexWebApp.Models.CustomerViewModels.Product", b =>
-                {
-                    b.Property<int>("ProductId")
-                        .ValueGeneratedOnAdd();
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Description");
 
-                    b.Property<bool>("IsAvailable");
+                    b.Property<DateTime>("LastUpdated");
 
-                    b.Property<string>("Name");
+                    b.Property<string>("Name")
+                        .IsRequired();
 
-                    b.Property<DateTime>("ProductionStart");
+                    b.HasKey("OrderId");
 
-                    b.HasKey("ProductId");
-
-                    b.ToTable("Products");
+                    b.ToTable("Orders");
                 });
 
             modelBuilder.Entity("AlexWebApp.Models.EmployeeViewModels.Department", b =>
@@ -413,56 +329,22 @@ namespace AlexWebApp.Data.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
-            modelBuilder.Entity("AlexWebApp.Models.CitiesViewModel.PointsOfInterest", b =>
+            modelBuilder.Entity("AlexWebApp.Models.ClientViewModels.Client", b =>
                 {
-                    b.HasOne("AlexWebApp.Models.CitiesViewModel.Cities", "Cities")
-                        .WithMany("PointsOfInterest")
-                        .HasForeignKey("CityId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                    b.HasOne("AlexWebApp.Models.ClientViewModels.Address", "BillingAddress")
+                        .WithMany()
+                        .HasForeignKey("BillingAddressAddressId");
+
+                    b.HasOne("AlexWebApp.Models.ClientViewModels.Address", "MailingAddress")
+                        .WithMany()
+                        .HasForeignKey("MailingAddressAddressId");
                 });
 
-            modelBuilder.Entity("AlexWebApp.Models.CustomerViewModels.Address", b =>
+            modelBuilder.Entity("AlexWebApp.Models.ClientViewModels.EmailPromo", b =>
                 {
-                    b.HasOne("AlexWebApp.Models.CustomerViewModels.Customer", "Customer")
-                        .WithMany("Addresses")
-                        .HasForeignKey("CustomerId")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("AlexWebApp.Models.CustomerViewModels.Category", b =>
-                {
-                    b.HasOne("AlexWebApp.Models.CustomerViewModels.Product", "Product")
-                        .WithMany("Categories")
-                        .HasForeignKey("ProductId");
-                });
-
-            modelBuilder.Entity("AlexWebApp.Models.CustomerViewModels.ContactDetail", b =>
-                {
-                    b.HasOne("AlexWebApp.Models.CustomerViewModels.Customer")
-                        .WithOne("ContactDetail")
-                        .HasForeignKey("AlexWebApp.Models.CustomerViewModels.ContactDetail", "CustomerId")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("AlexWebApp.Models.CustomerViewModels.LineItem", b =>
-                {
-                    b.HasOne("AlexWebApp.Models.CustomerViewModels.Order", "Order")
-                        .WithMany("LineItems")
-                        .HasForeignKey("OrderId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("AlexWebApp.Models.CustomerViewModels.Product", "Product")
-                        .WithMany("LineItems")
-                        .HasForeignKey("ProductId")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("AlexWebApp.Models.CustomerViewModels.Order", b =>
-                {
-                    b.HasOne("AlexWebApp.Models.CustomerViewModels.Customer", "Customer")
-                        .WithMany("Orders")
-                        .HasForeignKey("CustomerId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                    b.HasOne("AlexWebApp.Models.ClientViewModels.Client")
+                        .WithMany("EmailPromos")
+                        .HasForeignKey("ClientId");
                 });
 
             modelBuilder.Entity("AlexWebApp.Models.EmployeeViewModels.Employee", b =>

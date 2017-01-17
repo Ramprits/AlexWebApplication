@@ -1,18 +1,6 @@
-﻿@model $model$
+﻿@model IEnumerable<AlexWebApp.Models.CustomerViewModels.Address>
 
-@{
-  Layout = null;
+@foreach (var item in Model)
+{
+  @item.Customer.FullName
 }
-
-<!DOCTYPE html>
-
-<html>
-<head>
-  <title>$title$</title>
-</head>
-<body>
-  <div>
-    $END$  
-  </div>
-</body>
-</html>
